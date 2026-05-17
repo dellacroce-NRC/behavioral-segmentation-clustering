@@ -1,20 +1,83 @@
-# BauData Behavioral Segmentation & B2B Usage Analytics
+# BauData B2B Usage Analytics & Behavioral Segmentation
 
-This project analyzes BauData platform usage data to identify behavioral user profiles and translate them into actionable B2B commercial decisions.
+## Executive Summary
 
-The repository originally documented an academic/product strategy case. The current version focuses on the operational analytics layer: product usage, user behavior, company-level prioritization, and Power BI reporting for commercial decision-making.
+Built an end-to-end product analytics workflow that transforms raw PostHog behavioral telemetry into a commercial prioritization system for BauData, a B2B platform.
 
-## Business Goal
+The project moved from a descriptive clustering analysis to an operational dashboard that helps the commercial team answer a more valuable question: **which companies and users should receive attention first, and what action should be taken with each one?**
 
-BauData is a B2B platform, so the most useful decision unit is not only the individual user but also the company account.
+Instead of leaving the analysis at the user-segment level, the final version connects platform behavior with company/account data, enabling a B2B view of adoption, friction, usage value, and expansion opportunities.
 
-This project answers three practical questions:
+## Business Impact
 
-- Which active companies are using BauData?
-- Which companies have active users but no detected usage?
-- Which companies and users should be activated, recovered, monitored, maintained, or expanded?
+This project gives BauData a practical decision layer for commercial and customer success work:
 
-## Analytical Workflow
+- Prioritizes accounts with active users but no detected platform usage.
+- Identifies companies already generating value signals and potential expansion opportunities.
+- Detects users who explore the platform but do not complete the expected value action.
+- Converts behavioral clusters into simple commercial labels and recommended actions.
+- Reduces manual review by turning raw event/session data into ranked account and user lists.
+- Supports more focused sales, onboarding, adoption, and retention conversations.
+
+In practical terms, the dashboard helps the team move from **"we have usage data"** to **"these are the accounts we should activate, recover, maintain, or expand."**
+
+## Key Results From The Latest Local Run
+
+The current pipeline processed historical platform usage from PostHog and connected it with BauData's company/user master data.
+
+| Area | Result |
+|---|---:|
+| Raw PostHog events processed | 52,191 |
+| Raw PostHog sessions processed | 5,478 |
+| Modeled active sessions | 5,441 |
+| Unique users detected in usage data | 660 |
+| Companies in the B2B master layer | 141 |
+| Users with detected usage matched to company data | 191 |
+| Active users without detected usage | 144 |
+| Active companies without detected usage | 9 |
+| Non-email usage IDs requiring better identity mapping | 420 |
+
+These outputs exposed two commercially relevant realities:
+
+1. Some active customer accounts have users who are registered but not showing detected usage, creating a clear adoption/onboarding opportunity.
+2. A large share of PostHog activity still depends on improving identity resolution, because many usage IDs are technical or non-email identifiers that cannot yet be safely assigned to a company.
+
+## What The Dashboard Enables
+
+### 1. Company-Level Prioritization
+
+The executive page helps the commercial team quickly identify:
+
+- active companies with usage;
+- active companies without detected usage;
+- companies with downloads or stronger product value signals;
+- companies with many active users still not using the platform;
+- ranked accounts by commercial priority.
+
+This creates a cleaner account-management workflow: instead of scanning spreadsheets or raw event exports, the team can focus first on the accounts with the strongest adoption, activation, or expansion signal.
+
+### 2. User-Level Actionability
+
+The user page translates account-level diagnosis into concrete user-level action:
+
+- who is active but not using the product;
+- who is exploring but not downloading;
+- who shows high-value behavior;
+- who may need onboarding or friction reduction;
+- which users are good candidates for interviews, activation support, or success-case exploration.
+
+### 3. Behavioral Evidence Behind Commercial Decisions
+
+The clustering model is not presented as a technical artifact for its own sake. It is used as analytical evidence to classify behavior into interpretable user profiles, such as:
+
+- Power User;
+- Targeted/Search-oriented user;
+- Rebound/Friction user;
+- Risk or rage-click behavior.
+
+This makes the commercial recommendations more defensible: actions are tied to observed behavior, not only to intuition.
+
+## Analytical Approach
 
 ```text
 PostHog events and sessions
@@ -35,8 +98,34 @@ User-level commercial scoring
 Company-level B2B summary
         |
         v
-Power BI dashboard
+Power BI dashboard for commercial decision-making
 ```
+
+## Commercial Scoring Logic
+
+The scoring layer combines behavioral and business signals:
+
+- active users without detected usage;
+- users with high or medium activation opportunity;
+- users in recovery/friction patterns;
+- users with high-value behavior;
+- download and usage signals.
+
+Download behavior is treated as a proxy for product value because BauData identified downloads as an important customer action. The model is intentionally flexible: if the business later defines additional value actions, the scoring logic can incorporate them.
+
+## Why This Project Matters
+
+The value of the project is not only the clustering model. The stronger contribution is the translation of behavioral data into a usable commercial workflow.
+
+For BauData, this means:
+
+- faster identification of accounts needing activation;
+- clearer visibility into companies not extracting value;
+- better prioritization of commercial follow-up;
+- stronger evidence for onboarding, retention, and expansion decisions;
+- a reusable pipeline that can be refreshed as new PostHog data arrives.
+
+For a product or growth team, the project demonstrates how product analytics can connect telemetry, behavioral segmentation, account management, and executive reporting in one workflow.
 
 ## Main Components
 
@@ -99,13 +188,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\actualizar_baudata
 
 After the local pipeline finishes, refresh Power BI manually from `Inicio > Actualizar`.
 
-## Methodological Notes
+## Role & Tools
 
-The clustering model converts behavioral telemetry into interpretable user profiles. These profiles are combined with business rules such as active status, detected usage, download behavior, and interaction volume.
-
-In this version, download activity is treated as a proxy for product value or conversion because BauData identified downloads as a relevant customer action. This assumption can be adjusted if BauData defines additional high-value actions in the future.
-
-## Role
-
-Product & Behavioral Data Analyst  
-Tools: Python, pandas, scikit-learn, PostHog, Power BI, DAX, Excel
+**Role:** Product & Behavioral Data Analyst  
+**Tools:** Python, pandas, scikit-learn, PostHog, Power BI, DAX, Excel  
+**Focus:** Product analytics, behavioral segmentation, B2B account prioritization, commercial decision support
