@@ -21,6 +21,11 @@ The main story is:
 2. Drill down into users: which specific users explain the company's status and what action should be taken.
 3. Use clustering as analytical support: profiles help interpret behavior, but the decision layer is framed in business language.
 
+The current version has two final business pages:
+
+- `Resumen Ejecutivo Empresas`: account-level prioritization with active companies, usage, non-usage, downloads, no-downloads, and commercial priority.
+- `Accion Comercial Usuarios`: user-level actionability with active users, active users without use, usage, activation opportunity, high-value users, downloads, and no-downloads.
+
 ## Key analytical concepts
 
 ### Active company
@@ -40,6 +45,10 @@ This is a high-priority adoption signal: the company has active registered users
 Downloads are treated as a proxy for conversion or product value because BauData indicated that many customers use the platform to extract and share information internally.
 
 This is a modeling assumption, not a fixed truth. If BauData defines other key actions, the scoring logic can incorporate them.
+
+### Active entity without download
+
+The no-download layer was added to make the company and user pages comparable. At account level, it identifies active companies that may still not be reaching a stronger value signal. At user level, it identifies active users who may be using or exploring the product but have not completed the download action.
 
 ## Modeling decision
 

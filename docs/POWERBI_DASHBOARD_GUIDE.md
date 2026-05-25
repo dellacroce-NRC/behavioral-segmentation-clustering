@@ -1,18 +1,22 @@
 # Power BI Dashboard Guide
 
-## Recommended pages
+## Dashboard purpose
+
+The report is designed as a commercial decision tool, not as a technical machine-learning artifact. It helps the team identify which companies and users deserve attention first, why they matter, and which action should follow.
+
+## Pages
 
 ### 1. Resumen Ejecutivo Empresas
 
-Purpose: help the commercial team understand account-level opportunities quickly.
+Purpose: give commercial leadership a fast account-level view of adoption, non-usage, download/value signals, and prioritization.
 
-Recommended KPIs:
+Current KPIs:
 
 - Empresas Activas
 - Empresas Activas Con Uso
 - Empresas Activas Sin Uso
 - Tasa Empresas Activas Con Uso
-- Usuarios Activos Sin Uso
+- Empresas Activas Sin Descarga
 - Empresas Activas Con Descarga
 
 Recommended visuals:
@@ -22,20 +26,21 @@ Recommended visuals:
 - companies with the highest number of active users without detected use;
 - date slicer;
 - company slicer;
-- view selector for all companies vs priority segments.
+- view selector for all companies, prioritized companies, companies with use, companies without use, companies with downloads, and companies without downloads.
 
 ### 2. Accion Comercial Usuarios
 
 Purpose: move from the company/account level to specific users and recommended actions.
 
-Recommended KPIs:
+Current KPIs:
 
 - Usuarios Activos
 - Usuarios Activos Sin Uso
 - Usuarios Con Uso
 - Usuarios Oportunidad Activacion
 - Usuarios Alto Valor
-- Usuarios Con Descarga
+- Usuarios Activos Con Descarga
+- Usuarios Activos Sin Descarga
 
 Recommended visuals:
 
@@ -43,7 +48,20 @@ Recommended visuals:
 - user usage scatter plot;
 - users by recommended action;
 - company slicer;
-- user view selector.
+- user view selector for all users, prioritized users, active users, active users without use, users with use, activation opportunities, high-value users, users with downloads, and users without downloads.
+
+## Selector logic
+
+The selector should not duplicate the default table state.
+
+- On the company page, the default table is the prioritized account list; the selector still allows switching to all companies and specific commercial segments.
+- On the user page, the default table is all users; the selector allows switching to prioritized users and specific behavioral/commercial segments.
+
+This avoids a dead option where selecting a slicer value does not visibly change the table.
+
+## Date filtering
+
+Date slicers should be synchronized across pages when comparable KPIs are expected. If a KPI does not react to the date range, check whether the DAX measure is intentionally ignoring date context or whether the slicer is only scoped to the current page.
 
 ## Color logic
 
@@ -56,8 +74,6 @@ Use consistent colors across pages:
 - gray: friction, monitoring, or inactive/no detected use.
 
 ## Interpretation principle
-
-The dashboard should be explained as a commercial decision tool, not as a technical ML artifact.
 
 Suggested narrative:
 
