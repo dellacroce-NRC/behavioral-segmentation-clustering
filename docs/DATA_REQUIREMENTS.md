@@ -52,4 +52,4 @@ The current processing script expects column names equivalent to:
 
 ## Privacy note
 
-These files can contain customer names, user e-mails, internal usage behavior, and business-sensitive information. Keep them local unless BauData explicitly authorizes sharing anonymized samples.
+These files can contain customer names, user e-mails, internal usage behavior, and business-sensitive information. Keep them local unless In-Data explicitly authorizes sharing anonymized BauData samples.

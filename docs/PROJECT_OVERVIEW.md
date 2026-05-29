@@ -4,7 +4,7 @@
 
 The first version of this repository was closer to an academic/product strategy case. It included broader material such as landing-page analysis and UX audit work.
 
-The current version focuses on the platform usage problem:
+The current version focuses on the usage problem of BauData, In-Data's B2B real estate intelligence platform:
 
 - identifying behavioral patterns from PostHog telemetry;
 - validating whether K-Means is a reasonable clustering choice;
@@ -42,9 +42,9 @@ This is a high-priority adoption signal: the company has active registered users
 
 ### Download as value proxy
 
-Downloads are treated as a proxy for conversion or product value because BauData indicated that many customers use the platform to extract and share information internally.
+Downloads are treated as a proxy for conversion or product value because In-Data indicated that many BauData customers use the platform to extract and share information internally.
 
-This is a modeling assumption, not a fixed truth. If BauData defines other key actions, the scoring logic can incorporate them.
+This is a modeling assumption, not a fixed truth. If In-Data defines other key actions for BauData, the scoring logic can incorporate them.
 
 ### Active entity without download
 

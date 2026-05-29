@@ -1,6 +1,8 @@
 # BauData B2B Usage Analytics & Behavioral Segmentation
 
-End-to-end product analytics project that transforms PostHog behavioral telemetry into a commercial prioritization system for BauData, a B2B platform.
+End-to-end product analytics project that transforms PostHog behavioral telemetry into a commercial prioritization system for BauData, In-Data's B2B real estate intelligence platform.
+
+In-Data is the company behind the product. BauData is the platform analyzed in this project.
 
 The project evolved from user clustering into an operational Power BI dashboard for account management: which companies are adopting the product, where usage is missing, which users explain the opportunity, and what commercial action should follow.
 
@@ -116,7 +118,7 @@ Downloads are treated as an initial proxy of product value because BauData users
 
 ## Key Findings From The Latest Local Run
 
-The current pipeline processed historical platform usage from PostHog and connected it with BauData's company/user master data. Exact operational counts remain private, but the refresh validated two commercially relevant realities:
+The current pipeline processed historical platform usage from PostHog and connected it with In-Data's BauData company/user master data. Exact operational counts remain private, but the refresh validated two commercially relevant realities:
 
 1. Some active customer accounts have users who are registered but are not showing detected platform usage, creating an adoption and onboarding opportunity.
 2. Identity resolution is a meaningful product analytics risk: many PostHog identifiers are technical IDs rather than e-mails, so part of the activity cannot yet be safely assigned to a company.
